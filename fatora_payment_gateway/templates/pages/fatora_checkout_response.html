@@ -1,0 +1,95 @@
+{% extends "templates/web.html" %}
+
+{% block title %} Payment {% endblock %}
+
+{%- block header -%}
+<head>
+	<title>Merchant Checkout Page</title>
+</head>
+{% endblock %}
+
+{% block script %}
+<script defer type="text/javascript">
+	// document.fatora_form.submit();
+	
+	var csrf_token = $("#csrf_token").val()
+	var order_id = $("#order_id").val()
+
+	function update_payment_entry(order_id) {
+		// var order_id = {{ order_id }}
+		frappe.call({
+			method: "fatora_payment_gateway.fatora_payment_gateway.doctype.fatora_settings.fatora_settings.finalize_request",
+			headers: {
+				'X-Frappe-CSRF-Token': csrf_token
+			},
+			type: "POST",
+			args: {
+				"order_id": order_id,
+				"status":"{{ status }}",
+			},
+			success: function(r) {
+				console.log("hi11")
+				console.log(r)
+			},
+			error: function(r) {
+				console.log("hi22")
+				console.log(r)
+
+			},
+			always: function(r) {
+				console.log("hi33")
+				console.log(r)
+				if(r.message.location){
+					window.location.href=r.message.location
+				}
+			},
+			// btn: opts.btn,
+			// freeze: false,
+			// freeze_message: "",
+			async: true,
+			// url: "" || frappe.request.url,
+		});
+	}
+
+		// update_payment_entry({{ order_id }})
+		frappe.ready(()=> { 
+			update_payment_entry(order_id)
+		})
+		
+	
+</script>
+{% endblock %}
+
+{%- block page_content -%}
+<body>
+	<div class="centered">
+		<!-- <h2>Please wait ...</h2> -->
+		{{ html_str }}
+		<!-- <h3>{{ url }}</h3>
+		<h3>{{ data }}</h3>
+		<h3>{{ status }}</h3>
+		<h3>{{ reference_docname }}</h3>
+		<h3>{{ test1 }}</h3>
+		<h3>{{ csrf_token }}</h3> -->
+
+		<form method="post" action="{{ url }}" name="fatora_form">
+			<input type="hidden" name="csrf_token" value="{{csrf_token}}" id="csrf_token">
+			<input type="hidden" name="order_id" value="{{order_id}}" id="order_id">
+		</form>
+	</div>
+</body>
+{% endblock %}
+
+{% block style %}
+<style>
+	.centered {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.web-footer {
+		display: none;
+	}
+</style>
+{% endblock %}

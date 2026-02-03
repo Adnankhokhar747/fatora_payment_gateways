@@ -1,0 +1,41 @@
+{% extends "templates/web.html" %}
+
+{% block title %} Payment {% endblock %}
+
+{%- block header -%}
+<head>
+	<title>Merchant Checkout Page</title>
+</head>
+{% endblock %}
+
+{% block script %}
+<script defer type="text/javascript">
+	document.fatora_form.submit();
+</script>
+{% endblock %}
+
+{%- block page_content -%}
+<body>
+	<div class="centered">
+		<h2>Please do not refresh this page...</h2>
+		<!-- <h3>{{ url }}</h3> -->
+
+		<form method="post" action="{{ url }}" name="fatora_form">
+		</form>
+	</div>
+</body>
+{% endblock %}
+
+{% block style %}
+<style>
+	.centered {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.web-footer {
+		display: none;
+	}
+</style>
+{% endblock %}

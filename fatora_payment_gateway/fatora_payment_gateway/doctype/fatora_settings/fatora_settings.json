@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "creation": "2026-01-17 15:21:15.693156",
+ "default_view": "List",
+ "doctype": "DocType",
+ "document_type": "System",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "live_api_key",
+  "enable_live",
+  "column_break_svag",
+  "test_api_key",
+  "use_sandbox",
+  "payment_user"
+ ],
+ "fields": [
+  {
+   "fieldname": "live_api_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Live API  Key",
+   "mandatory_depends_on": "enable_live"
+  },
+  {
+   "default": "0",
+   "fieldname": "enable_live",
+   "fieldtype": "Check",
+   "label": "Enable Live"
+  },
+  {
+   "fieldname": "column_break_svag",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "test_api_key",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Test API Key"
+  },
+  {
+   "default": "0",
+   "description": "Check this if you are testing your payment using the Sandbox API",
+   "fieldname": "use_sandbox",
+   "fieldtype": "Check",
+   "label": "Use Sandbox"
+  },
+  {
+   "fieldname": "payment_user",
+   "fieldtype": "Link",
+   "label": "Payment User",
+   "options": "User"
+  }
+ ],
+ "in_create": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-02-03 20:23:18.526385",
+ "modified_by": "Administrator",
+ "module": "Fatora Payment Gateway",
+ "name": "Fatora Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "All",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "read_only": 1,
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
